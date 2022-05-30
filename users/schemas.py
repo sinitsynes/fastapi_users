@@ -1,3 +1,4 @@
+from datetime import date
 from pydantic import BaseModel
 
 
@@ -7,8 +8,27 @@ class Role_Create(BaseModel):
     class Config:
         orm_mode = True
 
+
 class Role_for_User(BaseModel):
     id: int
+
+
+class UserRole(BaseModel):
+    user_id: int
+    role_id: int
+    is_active: bool
+    date_created: date
+
+    class Config:
+        orm_mode = True
+
+
+class UserRoleResponse(BaseModel):
+    user_role: UserRole
+    name: str
+
+    class Config:
+        orm_mode = True
 
 
 class User_In_DB(BaseModel):
@@ -20,6 +40,7 @@ class User_In_DB(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 class UserResponse(BaseModel):
     username: str

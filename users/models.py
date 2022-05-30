@@ -1,10 +1,11 @@
 from datetime import date
-from urllib.robotparser import RobotFileParser
-from sqlalchemy import Column, ForeignKey, ForeignKeyConstraint, Integer, String, MetaData, Date, UniqueConstraint
+
+from sqlalchemy import Column, ForeignKey, Integer, String, Date, Boolean
 from sqlalchemy.orm import declarative_base, relationship
 
 
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -31,6 +32,7 @@ class UserRoles(Base):
 
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     role_id = Column(Integer, ForeignKey('role.id'), primary_key=True)
+    is_active = Column(Boolean)
     date_created = Column(Date, default=date.today())
 
 
@@ -46,4 +48,3 @@ class Departments(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String(20))
     department_level = Column(Integer, ForeignKey('dep_level.id'))
-
